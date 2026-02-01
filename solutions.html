@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Kadodo Africa | Solutions</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#a49945",
+                        "navy-deep": "#2e2b4f",
+                        "background-light": "#f7f7f6",
+                        "background-dark": "#1d1c15",
+                        "teal-muted": "#5c8d89"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .network-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(164, 153, 69, 0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .active-nav {
+            color: white;
+            position: relative;
+        }
+        .active-nav::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #a49945;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-background-light text-navy-deep overflow-x-hidden">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 px-6 md:px-20 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <img alt="Kadodo Africa" class="h-10 w-auto" src="img/kadodo logo.svg"/>
+        </div>
+        <nav class="hidden lg:flex flex-1 justify-center gap-8">
+            <a class="text-gray-600 hover:text-navy-deep text-sm font-medium transition-colors" href="index.html#home">Home</a>
+            <a class="active-nav text-sm font-medium transition-colors text-navy-deep" href="#">Solutions</a>
+            <a class="text-gray-600 hover:text-navy-deep text-sm font-medium transition-colors" href="contactus.html">Contact Us</a>
+            <a class="text-gray-600 hover:text-navy-deep text-sm font-medium transition-colors" href="about.html">About Us</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <button class="text-navy-deep text-sm font-bold px-4 py-2 hover:text-primary transition-colors">Login</button>
+            <div class="flex items-center gap-3">
+                <button class="bg-primary text-navy-deep text-sm font-bold px-5 py-2 rounded-lg shadow-lg hover:brightness-110 transition-all">
+                    Get Verified
+                </button>
+                <div class="relative country-dropdown group">
+                    <button class="flex items-center gap-2 bg-gray-50 border border-gray-200 hover:bg-gray-100 text-navy-deep text-xs font-bold px-3 py-2 rounded-lg transition-all">
+                        <img alt="Ghana Flag" class="rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW6-8c__I7TjbxAAQnfwnSBq-JOWyOR_D7U0Pzyhhl4NLsF7U_t9m69xxTV_ZMvLLctLwkCQ2AF1RTyUYPl0OiGO9BEuk39EJZ8A0WeIjlrd_BgJK_64yif4lFle9M3CoZ-r3WncQjUJLR98ZJyUDcRHw-FKMV44w-GFH71QMdGVLglyzzqCF6PZIyQ7yaaa1jjwP1acv1gMfBrjmxxZ3eJqvZxhEbfcVjqonjSlsV6SrH7xWDaqKqcvhTM0fyoWl1jpIM-kmiKXk" width="20"/>
+                        <span>Ghana</span>
+                        <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </button>
+                    <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl py-2 hidden">
+                        <a class="flex items-center gap-3 px-4 py-2 text-sm text-navy-deep hover:bg-gray-50 transition-colors font-semibold" href="#">
+                            <img alt="Ghana Flag" class="rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvoddAhs2x7j9fs7pY-d-Pz2LgdOnzZUvK6fC1SiUWrPczD8JK6EAujDXr3kk_rztCCmc6wiGfZ1qaG0XgPz6hczSnORIWMLiCe58jpv3KVLcMSEGrUrn6AKxE4WHU1bGMCCtcJ5JXVTxaWF6tPc6fhxoBQN1HlwlVnIGUjV6eajpFuB-_HcDgFKP5Ce9j1cQFRlelN4gPKwSI1ZjnTea9iQ1U6bf-xyZpj0lh-PUEDgpjy4K3D4yAXWgM0rQlM6CLgxEijylfbr8" width="20"/>
+                            Ghana
+                        </a>
+                        <a class="flex items-center gap-3 px-4 py-2 text-sm text-navy-deep hover:bg-gray-50 transition-colors font-semibold border-t border-gray-100" href="#">
+                            <img alt="CARICOM Flag" class="rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBNSLhhONfrrCHcTbJBA9L8zB7aWDtAgHfKltTBenWDYb9GfQGfhnu7yx422AIEc_7D3iFSq3czt8033sGn8x7hgoerIvSPn3RwZDutF9B0CMDVvUVh7uneVQtr46BCxTG7za2057zAYvoP4HyUzOrEGeYm86ZFoldrcYWi49yk1k7G-hkjpQ3BXNewRRbdq5B0fTimrKp46p_pA5Rca7ho_gKn8QKVGrN1YNXU65deZbWFym47UWmw4pcuzayge1odcQoWALLs3A" width="20"/>
+                            CARICOM
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[400px] flex items-center justify-center text-center overflow-hidden bg-navy-deep">
+        <div class="absolute inset-0 network-pattern opacity-20"></div>
+        <div class="relative z-10 max-w-4xl px-6 py-20">
+            <h1 class="text-white text-4xl md:text-6xl font-black mb-6 leading-tight">Our Solutions</h1>
+            <p class="text-white/80 text-xl md:text-2xl font-light leading-relaxed max-w-3xl mx-auto">
+                Comprehensive verification services designed to build trust across African and Caribbean markets
+            </p>
+        </div>
+    </section>
+
+    <!-- Business Verification Section -->
+    <section class="py-24 bg-background-light">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-navy-deep mb-6">Business Verification</h2>
+                <p class="text-gray-600 text-xl max-w-3xl mx-auto">Comprehensive KYB solutions tailored for African and Caribbean markets</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                <div class="pricing-card p-8 border border-gray-100 rounded-2xl bg-white shadow-sm flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Kadodo Basic</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-navy-deep">₵50</span>
+                        <span class="text-gray-500">/entity</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 text-sm mb-8 flex-grow">
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Basic Company Information</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Registration Status Check</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Tax ID Verification</span>
+                        </li>
+                    </ul>
+                    <a href="contactus.html" class="w-full py-3 rounded-xl border-2 border-navy-deep text-navy-deep font-bold hover:bg-navy-deep hover:text-white transition-all inline-block text-center">Get Started</a>
+                </div>
+                
+                <div class="pricing-card p-8 border border-gray-100 rounded-2xl bg-white shadow-sm flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Kadodo Verified</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-navy-deep">₵150</span>
+                        <span class="text-gray-500">/entity</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 text-sm mb-8 flex-grow">
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Everything in Basic</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Physical Address Check</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Director Verification</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Shareholder Analysis</span>
+                        </li>
+                    </ul>
+                    <a href="contactus.html" class="w-full py-3 rounded-xl border-2 border-navy-deep text-navy-deep font-bold hover:bg-navy-deep hover:text-white transition-all inline-block text-center">Verify Now</a>
+                </div>
+                
+                <div class="pricing-card p-8 border border-gray-100 rounded-2xl bg-white shadow-sm flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Kadodo Trust+</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-navy-deep">₵300</span>
+                        <span class="text-gray-500">/entity</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 text-sm mb-8 flex-grow">
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Everything in Verified</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Financial Sanctions Check</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>Adverse Media Screening</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary text-base mt-0.5">check_circle</span>
+                            <span>ESG Performance Score</span>
+                        </li>
+                    </ul>
+                    <a href="contactus.html" class="w-full py-3 rounded-xl border-2 border-navy-deep text-navy-deep font-bold hover:bg-navy-deep hover:text-white transition-all inline-block text-center">Upgrade</a>
+                </div>
+            </div>
+
+            <div class="bg-navy-deep rounded-3xl p-12 text-white text-center">
+                <div class="max-w-3xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-4">Enterprise Solutions</h3>
+                    <p class="text-white/80 mb-8">For high-volume verification needs, custom integrations, and dedicated support</p>
+                    <a href="contactus.html" class="bg-primary text-navy-deep px-8 py-4 rounded-xl font-black text-lg shadow-lg hover:brightness-110 transition-all inline-block">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Individual Verification Section -->
+    <section class="py-24 bg-white">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-navy-deep mb-6">Individual Verification</h2>
+                <p class="text-gray-600 text-xl max-w-3xl mx-auto">Secure identity verification for professionals and individuals</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="space-y-6">
+                    <h3 class="text-3xl font-bold text-navy-deep">Professional Identity Verification</h3>
+                    <p class="text-gray-600 text-lg">Verify professional credentials, educational background, and work history to establish trust in business relationships.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-xl mt-0.5">badge</span>
+                            <div>
+                                <span class="font-semibold text-navy-deep">Educational Credentials</span>
+                                <p class="text-gray-600 text-sm">Verify degrees, certifications, and academic achievements</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-xl mt-0.5">work</span>
+                            <div>
+                                <span class="font-semibold text-navy-deep">Employment History</span>
+                                <p class="text-gray-600 text-sm">Validate professional experience and career progression</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-xl mt-0.5">verified</span>
+                            <div>
+                                <span class="font-semibold text-navy-deep">Professional Licenses</span>
+                                <p class="text-gray-600 text-sm">Confirm regulatory and professional certifications</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="contactus.html" class="bg-primary text-navy-deep px-8 py-4 rounded-xl font-black text-lg shadow-lg hover:brightness-110 transition-all flex items-center gap-3 inline-block">
+                        Get Individually Verified
+                        <span class="material-symbols-outlined">chevron_right</span>
+                    </a>
+                </div>
+                <div class="relative h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-teal-muted/20"></div>
+                    <div class="absolute inset-0 flex items-center justify-center p-8">
+                        <div class="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-primary/20 text-center w-full max-w-sm">
+                            <span class="material-symbols-outlined text-primary text-6xl mb-4">person</span>
+                            <h4 class="text-navy-deep font-bold text-xl mb-2">Identity Verified</h4>
+                            <p class="text-gray-600 text-sm">Professional credentials authenticated and secured</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-navy-deep to-teal-muted rounded-3xl p-12 text-white">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div>
+                        <div class="text-4xl font-black mb-2">99.9%</div>
+                        <div class="text-white/80">Accuracy Rate</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-black mb-2">&lt;2 mins</div>
+                        <div class="text-white/80">Average Processing</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-black mb-2">50K+</div>
+                        <div class="text-white/80">Verifications Completed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Integration Section -->
+    <section class="py-24 bg-background-light">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-4xl font-black text-navy-deep mb-6">API Integration</h2>
+                    <p class="text-gray-600 text-lg mb-8">Seamlessly integrate our verification services into your existing workflows and applications.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="mt-1 w-2 h-2 rounded-full bg-primary"></div>
+                            <div>
+                                <h4 class="font-bold text-navy-deep mb-1">Real-time Verification</h4>
+                                <p class="text-gray-600 text-sm">Instant API responses for automated verification workflows</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="mt-1 w-2 h-2 rounded-full bg-primary"></div>
+                            <div>
+                                <h4 class="font-bold text-navy-deep mb-1">Webhook Notifications</h4>
+                                <p class="text-gray-600 text-sm">Receive instant updates on verification status changes</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="mt-1 w-2 h-2 rounded-full bg-primary"></div>
+                            <div>
+                                <h4 class="font-bold text-navy-deep mb-1">Bulk Processing</h4>
+                                <p class="text-gray-600 text-sm">Process large volumes of verifications efficiently</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="mt-1 w-2 h-2 rounded-full bg-primary"></div>
+                            <div>
+                                <h4 class="font-bold text-navy-deep mb-1">Comprehensive Documentation</h4>
+                                <p class="text-gray-600 text-sm">Detailed guides and SDKs for quick implementation</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 pt-6">
+                        <div class="px-4 py-2 bg-white rounded-lg border border-gray-200 text-sm font-mono">REST API</div>
+                        <div class="px-4 py-2 bg-white rounded-lg border border-gray-200 text-sm font-mono">JSON</div>
+                        <div class="px-4 py-2 bg-white rounded-lg border border-gray-200 text-sm font-mono">OAuth 2.0</div>
+                        <div class="px-4 py-2 bg-white rounded-lg border border-gray-200 text-sm font-mono">Webhooks</div>
+                    </div>
+                </div>
+                
+                <div class="bg-navy-deep rounded-2xl p-8 text-white">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">Developer Resources</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between py-3 border-b border-white/10">
+                                    <span class="text-white/80">API Documentation</span>
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </div>
+                                <div class="flex items-center justify-between py-3 border-b border-white/10">
+                                    <span class="text-white/80">SDK Libraries</span>
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </div>
+                                <div class="flex items-center justify-between py-3 border-b border-white/10">
+                                    <span class="text-white/80">Sandbox Environment</span>
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </div>
+                                <div class="flex items-center justify-between py-3">
+                                    <span class="text-white/80">Support Portal</span>
+                                    <span class="material-symbols-outlined">arrow_forward</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white/5 rounded-xl p-6">
+                            <h4 class="font-bold mb-3">For Enterprise Clients</h4>
+                            <p class="text-white/70 text-sm mb-4">Dedicated technical support, custom integrations, and priority processing.</p>
+                            <a href="contactus.html" class="bg-primary text-navy-deep px-6 py-3 rounded-lg font-bold text-sm shadow-lg hover:brightness-110 transition-all inline-block">
+                                Request API Access
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-24 bg-white">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-navy-deep mb-6">How It Works</h2>
+                <p class="text-gray-600 text-xl max-w-3xl mx-auto">Simple, transparent process from start to finish</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center group">
+                    <div class="size-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-all">
+                        <span class="material-symbols-outlined text-primary group-hover:text-navy-deep text-3xl">upload</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-deep mb-3">1. Submit Information</h3>
+                    <p class="text-gray-600">Provide basic entity or individual details through our secure portal</p>
+                </div>
+                
+                <div class="text-center group">
+                    <div class="size-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-all">
+                        <span class="material-symbols-outlined text-primary group-hover:text-navy-deep text-3xl">search</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-deep mb-3">2. Automated Verification</h3>
+                    <p class="text-gray-600">Our system cross-references multiple authoritative databases</p>
+                </div>
+                
+                <div class="text-center group">
+                    <div class="size-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-all">
+                        <span class="material-symbols-outlined text-primary group-hover:text-navy-deep text-3xl">analytics</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-deep mb-3">3. Risk Assessment</h3>
+                    <p class="text-gray-600">Advanced algorithms evaluate risk factors and compliance indicators</p>
+                </div>
+                
+                <div class="text-center group">
+                    <div class="size-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary transition-all">
+                        <span class="material-symbols-outlined text-primary group-hover:text-navy-deep text-3xl">verified</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy-deep mb-3">4. Receive Results</h3>
+                    <p class="text-gray-600">Get instant verification certificate and detailed compliance report</p>
+                </div>
+            </div>
+            
+            <div class="mt-20 flex justify-center">
+                <a href="contactus.html" class="bg-primary text-navy-deep px-12 py-4 rounded-lg font-bold shadow-2xl hover:brightness-110 transition-all uppercase tracking-widest text-sm inline-block">
+                    Start Your Verification
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="bg-navy-deep py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="w-full h-full bg-[radial-gradient(circle_at_center,_var(--primary-color)_1px,_transparent_1px)] bg-[size:40px_40px]"></div>
+        </div>
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-white text-4xl md:text-5xl font-black mb-8">Ready to Build Trust?</h2>
+            <p class="text-white/70 text-xl mb-12 max-w-2xl mx-auto">Whether you are a business seeking growth or a partner seeking impact, Kadodo Africa is your gateway to trust.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="contactus.html" class="bg-primary text-navy-deep px-10 py-5 rounded-xl font-bold text-lg shadow-2xl hover:brightness-110 transition-all flex items-center gap-3 inline-block">
+                    Get Verified Today
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+                <a href="contactus.html" class="bg-transparent text-white border-2 border-white/20 px-10 py-5 rounded-xl font-bold text-lg hover:bg-white/10 transition-all inline-block">
+                    Contact Our Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-deep text-white pt-20 pb-10 border-t border-white/10">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img alt="Kadodo Africa" class="h-10 w-auto" src="img/kadodo logo.svg"/>
+                    </div>
+                    <p class="text-white/60 text-sm max-w-sm mb-6 leading-relaxed">
+                        Empowering African and Caribbean commerce through secure, decentralized trust infrastructure. Official digital passport for cross-border trade.
+                    </p>
+                    <div class="flex gap-4">
+                        <a class="size-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 transition-colors" href="#">
+                            <span class="material-symbols-outlined text-xl">share</span>
+                        </a>
+                        <a class="size-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary/20 transition-colors" href="#">
+                            <span class="material-symbols-outlined text-xl">mail</span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-primary uppercase tracking-widest text-sm">Navigation</h4>
+                    <ul class="space-y-4 text-sm text-white/70">
+                        <li><a class="hover:text-white transition-colors" href="index.html#home">Home</a></li>
+                        <li><a class="hover:text-white transition-colors" href="#">Solutions</a></li>
+                        <li><a class="hover:text-white transition-colors" href="contactus.html">Contact Us</a></li>
+                        <li><a class="hover:text-white transition-colors" href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-6 text-primary uppercase tracking-widest text-sm">Company</h4>
+                    <ul class="space-y-4 text-sm text-white/70">
+                        <li><a class="hover:text-white transition-colors" href="#">Legal & Privacy</a></li>
+                        <li><a class="hover:text-white transition-colors" href="#">Terms of Service</a></li>
+                        <li><a class="hover:text-white transition-colors" href="#">Contact</a></li>
+                        <li><a class="hover:text-white transition-colors" href="#">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/40 text-xs">© 2024 Kadodo Africa. All Rights Reserved. Built for AfCFTA.</p>
+                <div class="flex gap-6 text-xs text-white/40">
+                    <a class="hover:text-white" href="#">Privacy Policy</a>
+                    <a class="hover:text-white" href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
